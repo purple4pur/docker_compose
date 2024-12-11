@@ -16,8 +16,8 @@ if [[ "$(ps -aux | grep 'npm run app' | grep -v grep)" != "" ]]; then
     exit 1
 fi
 
-echo "> git checkout . && git pull --rebase"
-(git checkout . && git pull --rebase) || exit 1
+#echo "> git checkout . && git pull --rebase"
+#(git checkout . && git pull --rebase) || exit 1
 
 echo "> yes | pnpm i"
 (yes | pnpm i) || exit 1

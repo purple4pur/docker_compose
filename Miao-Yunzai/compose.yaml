@@ -1,0 +1,64 @@
+services:
+  miao-yunzai:
+    build:
+      context: "./docker"
+      args:
+        BUNDLE_FFMPEG: "false"   # 是否在构建时打包 ffmpeg
+        BUNDLE_POETRY: "false"   # 是否在构建时打包 poetry
+        USE_APT_MIRROR: "false"  # 是否在构建时使用 apt 镜像
+        USE_NPM_MIRROR: "false"  # 是否在构建时使用 npm 镜像
+        USE_PYPI_MIRROR: "false" # 是否在构建时使用 pypi 镜像
+    container_name: "miao-yunzai"
+    depends_on:
+      redis:
+        condition: "service_healthy"
+    restart: "unless-stopped"
+    labels:
+      traefik.enable: true
+
+      # guoba.BASEURL -> :50831, 锅巴插件 webui
+      traefik.http.services.guoba.loadbalancer.server.port: "50831"
+      traefik.http.routers.guoba.rule: "Host(`guoba.${BASEURL:?error}`)"
+      traefik.http.routers.guoba.entrypoints: "websecure"
+      traefik.http.routers.guoba.tls.certresolver: "cloudflare"
+      traefik.http.routers.guoba.service: "guoba"
+    networks:
+      frontend:
+      local:
+    volumes:
+      - "/home/${BOT_USER:?error}/Miao-Yunzai/config/:/app/Miao-Yunzai/config/" # Bot基础配置文件
+      - "/home/${BOT_USER:?error}/Miao-Yunzai/logs:/app/Miao-Yunzai/logs"       # 日志文件
+      - "/home/${BOT_USER:?error}/Miao-Yunzai/data:/app/Miao-Yunzai/data"       # 数据文件
+      - "/home/${BOT_USER:?error}/Miao-Yunzai/temp:/app/Miao-Yunzai/temp"       # 临时文件
+      - "/home/${BOT_USER:?error}/Miao-Yunzai/plugins:/app/Miao-Yunzai/plugins"
+
+      - "pnpm_store:/root/.local/share/pnpm/store"
+      - "node_modules:/app/Miao-Yunzai/node_modules"
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
+
+  redis:
+    image: "redis:alpine"
+    container_name: "miao-redis"
+    healthcheck:
+      test: ["CMD", "redis-cli", "PING"]
+      start_period: "10s"
+      interval: "30s"
+      timeout: "5s"
+    restart: "unless-stopped"
+    volumes:
+      - "/home/${BOT_USER:?error}/Miao-Yunzai/redis/data:/data"
+      - "/home/${BOT_USER:?error}/Miao-Yunzai/redis/logs:/logs"
+    networks:
+      local:
+
+volumes:
+  pnpm_store:
+  node_modules:
+
+networks:
+  frontend:
+    external: true
+  local:

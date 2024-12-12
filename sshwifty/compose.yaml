@@ -1,0 +1,22 @@
+services:
+  sshwifty:
+    image: "niruix/sshwifty:latest"
+    container_name: "sshwifty"
+    restart: "unless-stopped"
+    environment:
+      SSHWIFTY_CONFIG: "/etc/sshwifty/config.json"
+    labels:
+      traefik.enable: true
+      traefik.http.services.sshwifty.loadbalancer.server.port: "8182"
+      traefik.http.routers.sshwifty_cf.rule: "Host(`shell.${BASEURL:?error}`)"
+      traefik.http.routers.sshwifty_cf.entrypoints: "websecure"
+      traefik.http.routers.sshwifty_cf.tls.certresolver: "cloudflare"
+      traefik.http.routers.sshwifty_cf.service: "sshwifty"
+    networks:
+      frontend:
+    volumes:
+      - "./config/sshwifty.conf.json:/etc/sshwifty/config.json:ro"
+
+networks:
+  frontend:
+    external: true

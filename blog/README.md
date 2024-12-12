@@ -1,3 +1,7 @@
+### Related post
+
+- [[Blog Deployment Automation: ONE Post, TWO Sites]](https://purple4pur.github.io/post/Blog%20Deployment%20Automation-%20ONE%20Post%2C%20TWO%20Sites.html)
+
 ### Preparation
 
 ```sh
@@ -7,7 +11,7 @@ git pull BLOG_GIT myblog
 
 ### Example `olivetin.yaml`
 
-A `./config/olivetin.yaml` file is needed.
+A `./config/olivetin.yaml` file is required.
 
 ```yaml
 logLevel: "WARN"

@@ -1,0 +1,98 @@
+services:
+  c_upper:
+    build: "${C_UPPER_BUILD_DIR}"
+    container_name: "c_upper"
+    healthcheck:
+      test: ["CMD-SHELL", "(ps | grep app | grep -v grep) || exit 1"]
+      start_period: "2s"
+      interval: "1m"
+      timeout: "2s"
+    restart: "unless-stopped"
+    environment:
+      PORT: "8091"
+      TARGET: "http://osu_proxy:8091"
+      SENSITIVE_HEADER: "${C_UPPER_HEADER}"
+      ALLOWED_ID: "${C_UPPER_ALLOWED_ID}"
+    labels:
+      traefik.enable: true
+      traefik.http.services.osu_proxy_c.loadbalancer.server.port: "8091"
+      traefik.http.routers.osu_proxy_c.rule: "Host(`c.${BASEURL:?error}`)"
+      traefik.http.routers.osu_proxy_c.entrypoints: "websecure"
+      traefik.http.routers.osu_proxy_c.tls.certresolver: "cloudflare"
+      traefik.http.routers.osu_proxy_c.service: "osu_proxy_c"
+    networks:
+      frontend:
+
+  osu_proxy:
+    image: "nginx:alpine"
+    container_name: "osu_proxy"
+    restart: "unless-stopped"
+    hostname: "osu_proxy"
+    labels:
+      traefik.enable: true
+
+      traefik.http.middlewares.osu_proxy_redirect.redirectregex.regex: "^(?:https?:\\/\\/)?osu\\.${BASEURL_RE:?error}(.*)"
+      traefik.http.middlewares.osu_proxy_redirect.redirectregex.replacement: "https://osu.ppy.sh$${1}"
+      traefik.http.routers.osu_proxy_redirect.entrypoints: "websecure"
+      traefik.http.routers.osu_proxy_redirect.rule: "Host(`osu.${BASEURL:?error}`)"
+      traefik.http.routers.osu_proxy_redirect.tls.certresolver: "cloudflare"
+      traefik.http.routers.osu_proxy_redirect.service: "noop@internal"
+      traefik.http.routers.osu_proxy_redirect.middlewares: "osu_proxy_redirect"
+      traefik.http.routers.osu_proxy_redirect.priority: 10
+
+      traefik.http.services.osu_proxy_osu.loadbalancer.server.port: "8080"
+      traefik.http.routers.osu_proxy_osu.rule: "Host(`osu.${BASEURL:?error}`) && (PathPrefix(`/web/`) || PathPrefix(`/d/`))"
+      traefik.http.routers.osu_proxy_osu.entrypoints: "websecure"
+      traefik.http.routers.osu_proxy_osu.tls.certresolver: "cloudflare"
+      traefik.http.routers.osu_proxy_osu.service: "osu_proxy_osu"
+      traefik.http.routers.osu_proxy_osu.priority: 11
+
+      traefik.http.services.osu_proxy_a.loadbalancer.server.port: "8081"
+      traefik.http.routers.osu_proxy_a.rule: "Host(`a.${BASEURL:?error}`)"
+      traefik.http.routers.osu_proxy_a.entrypoints: "websecure"
+      traefik.http.routers.osu_proxy_a.tls.certresolver: "cloudflare"
+      traefik.http.routers.osu_proxy_a.service: "osu_proxy_a"
+
+      traefik.http.services.osu_proxy_b.loadbalancer.server.port: "8082"
+      traefik.http.routers.osu_proxy_b.rule: "Host(`b.${BASEURL:?error}`)"
+      traefik.http.routers.osu_proxy_b.entrypoints: "websecure"
+      traefik.http.routers.osu_proxy_b.tls.certresolver: "cloudflare"
+      traefik.http.routers.osu_proxy_b.service: "osu_proxy_b"
+
+      traefik.http.services.osu_proxy_assets.loadbalancer.server.port: "8083"
+      traefik.http.routers.osu_proxy_assets.rule: "Host(`assets.${BASEURL:?error}`)"
+      traefik.http.routers.osu_proxy_assets.entrypoints: "websecure"
+      traefik.http.routers.osu_proxy_assets.tls.certresolver: "cloudflare"
+      traefik.http.routers.osu_proxy_assets.service: "osu_proxy_assets"
+
+      traefik.http.services.osu_proxy_ce.loadbalancer.server.port: "8090"
+      traefik.http.routers.osu_proxy_ce.rule: "Host(`ce.${BASEURL:?error}`)"
+      traefik.http.routers.osu_proxy_ce.entrypoints: "websecure"
+      traefik.http.routers.osu_proxy_ce.tls.certresolver: "cloudflare"
+      traefik.http.routers.osu_proxy_ce.service: "osu_proxy_ce"
+
+      traefik.http.services.osu_proxy_c4.loadbalancer.server.port: "8094"
+      traefik.http.routers.osu_proxy_c4.rule: "Host(`c4.${BASEURL:?error}`)"
+      traefik.http.routers.osu_proxy_c4.entrypoints: "websecure"
+      traefik.http.routers.osu_proxy_c4.tls.certresolver: "cloudflare"
+      traefik.http.routers.osu_proxy_c4.service: "osu_proxy_c4"
+
+      traefik.http.services.osu_proxy_c5.loadbalancer.server.port: "8095"
+      traefik.http.routers.osu_proxy_c5.rule: "Host(`c5.${BASEURL:?error}`)"
+      traefik.http.routers.osu_proxy_c5.entrypoints: "websecure"
+      traefik.http.routers.osu_proxy_c5.tls.certresolver: "cloudflare"
+      traefik.http.routers.osu_proxy_c5.service: "osu_proxy_c5"
+
+      traefik.http.services.osu_proxy_c6.loadbalancer.server.port: "8096"
+      traefik.http.routers.osu_proxy_c6.rule: "Host(`c6.${BASEURL:?error}`)"
+      traefik.http.routers.osu_proxy_c6.entrypoints: "websecure"
+      traefik.http.routers.osu_proxy_c6.tls.certresolver: "cloudflare"
+      traefik.http.routers.osu_proxy_c6.service: "osu_proxy_c6"
+    networks:
+      frontend:
+    volumes:
+      - "./config/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+
+networks:
+  frontend:
+    external: true

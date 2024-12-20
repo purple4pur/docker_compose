@@ -1,0 +1,37 @@
+services:
+  frps:
+    build:
+      dockerfile: "dockerfile/frp.Dockerfile"
+      tags:
+        - "frp:${FRP_VERSION:?error}"
+      args:
+        FRP_VERSION: "${FRP_VERSION:?error}"
+    container_name: "frp_server"
+    restart: "unless-stopped"
+    command: ["./frps", "-c", "/etc/frp/frps.toml"]
+    labels:
+      traefik.enable: true
+
+      traefik.http.services.frp_sftpgo_webui.loadbalancer.server.port: "2080"
+      traefik.http.routers.sftpgo_webui.rule: "Host(`disk.${BASEURL:?error}`)"
+      traefik.http.routers.sftpgo_webui.entrypoints: "websecure"
+      traefik.http.routers.sftpgo_webui.tls.certresolver: "cloudflare"
+      traefik.http.routers.sftpgo_webui.service: "frp_sftpgo_webui"
+
+      traefik.http.services.frp_sftpgo_webdav.loadbalancer.server.port: "80"
+      traefik.http.routers.sftpgo_webdav.rule: "Host(`webdav.${BASEURL:?error}`)"
+      traefik.http.routers.sftpgo_webdav.entrypoints: "websecure"
+      traefik.http.routers.sftpgo_webdav.tls.certresolver: "cloudflare"
+      traefik.http.routers.sftpgo_webdav.service: "frp_sftpgo_webdav"
+    networks:
+      frontend:
+    ports:
+      - "7000:7000"
+      - "2022:2022"
+      - "6022:6022"
+    volumes:
+      - "./config/frps.toml:/etc/frp/frps.toml:ro"
+
+networks:
+  frontend:
+    external: true

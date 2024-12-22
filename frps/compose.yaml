@@ -17,6 +17,7 @@ services:
       traefik.http.routers.sftpgo_webui.entrypoints: "websecure"
       traefik.http.routers.sftpgo_webui.tls.certresolver: "cloudflare"
       traefik.http.routers.sftpgo_webui.service: "frp_sftpgo_webui"
+      traefik.http.routers.sftpgo_webui.middlewares: "user_auth"
 
       traefik.http.services.frp_sftpgo_webdav.loadbalancer.server.port: "80"
       traefik.http.routers.sftpgo_webdav.rule: "Host(`webdav.${BASEURL:?error}`)"
@@ -27,7 +28,6 @@ services:
       frontend:
     ports:
       - "7000:7000"
-      - "2022:2022"
       - "6022:6022"
     volumes:
       - "./config/frps.toml:/etc/frp/frps.toml:ro"

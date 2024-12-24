@@ -1,6 +1,6 @@
 ### Example `./config/traefik.yaml`
 
-See [[Traefik Config Snippets]](https://blog.quitw.org//post/Traefik%20Config%20Snippets.html) .
+See [Traefik Config Snippets](https://blog.quitw.org//post/Traefik%20Config%20Snippets.html) .
 
 ### Example `.env`
 

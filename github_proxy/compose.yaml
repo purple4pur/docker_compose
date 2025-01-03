@@ -1,0 +1,60 @@
+services:
+  gh_proxy_util:
+    build: "${UTIL_DIR}"
+    container_name: "gh_proxy_util"
+    environment:
+      GH_PROXY_HOSTNAME: "${BASEURL}"
+    command:
+      - "8080->http://gh_proxy:8080"
+      - "8081->http://gh_proxy:8081"
+      - "8082->http://gh_proxy:8082"
+      - "8083->http://gh_proxy:8083"
+      - "8084->http://gh_proxy:8084"
+    labels:
+      traefik.enable: true
+
+      traefik.http.services.github_proxy_github.loadbalancer.server.port: "8080"
+      traefik.http.routers.github_proxy_github.rule: "Host(`github.${BASEURL:?error}`)"
+      traefik.http.routers.github_proxy_github.entrypoints: "websecure"
+      traefik.http.routers.github_proxy_github.tls.certresolver: "cloudflare"
+      traefik.http.routers.github_proxy_github.service: "github_proxy_github"
+
+      traefik.http.services.github_proxy_assets.loadbalancer.server.port: "8081"
+      traefik.http.routers.github_proxy_assets.rule: "Host(`github-githubassets.${BASEURL:?error}`)"
+      traefik.http.routers.github_proxy_assets.entrypoints: "websecure"
+      traefik.http.routers.github_proxy_assets.tls.certresolver: "cloudflare"
+      traefik.http.routers.github_proxy_assets.service: "github_proxy_assets"
+
+      traefik.http.services.github_proxy_avatars.loadbalancer.server.port: "8082"
+      traefik.http.routers.github_proxy_avatars.rule: "Host(`avatars-githubusercontent.${BASEURL:?error}`)"
+      traefik.http.routers.github_proxy_avatars.entrypoints: "websecure"
+      traefik.http.routers.github_proxy_avatars.tls.certresolver: "cloudflare"
+      traefik.http.routers.github_proxy_avatars.service: "github_proxy_avatars"
+
+      traefik.http.services.github_proxy_raw.loadbalancer.server.port: "8083"
+      traefik.http.routers.github_proxy_raw.rule: "Host(`raw-githubusercontent.${BASEURL:?error}`)"
+      traefik.http.routers.github_proxy_raw.entrypoints: "websecure"
+      traefik.http.routers.github_proxy_raw.tls.certresolver: "cloudflare"
+      traefik.http.routers.github_proxy_raw.service: "github_proxy_raw"
+
+      traefik.http.services.github_proxy_objects.loadbalancer.server.port: "8084"
+      traefik.http.routers.github_proxy_objects.rule: "Host(`objects-githubusercontent.${BASEURL:?error}`)"
+      traefik.http.routers.github_proxy_objects.entrypoints: "websecure"
+      traefik.http.routers.github_proxy_objects.tls.certresolver: "cloudflare"
+      traefik.http.routers.github_proxy_objects.service: "github_proxy_objects"
+    networks:
+      frontend:
+
+  github_proxy:
+    image: "nginx:alpine"
+    container_name: "github_proxy"
+    restart: "unless-stopped"
+    hostname: "gh_proxy"
+    networks:
+      frontend:
+    volumes:
+      - "./config/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+
+networks:
+  frontend:
+    external: true

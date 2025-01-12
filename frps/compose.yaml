@@ -31,6 +31,10 @@ services:
       - "6022:6022"
     volumes:
       - "./config/frps.toml:/etc/frp/frps.toml:ro"
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
 
 networks:
   frontend:

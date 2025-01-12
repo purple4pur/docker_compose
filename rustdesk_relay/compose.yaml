@@ -3,7 +3,7 @@ services:
     image: "rustdesk/rustdesk-server:latest"
     container_name: "hbbs"
     depends_on:
-      hbbr:
+      - "hbbr"
     restart: "unless-stopped"
     command: ["hbbs"]
     ports:
@@ -13,6 +13,10 @@ services:
       - "21118:21118"
     volumes:
       - "./data:/root"
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
 
   hbbr:
     image: "rustdesk/rustdesk-server:latest"
@@ -24,3 +28,7 @@ services:
       - "21119:21119"
     volumes:
       - "./data:/root"
+    deploy:
+      resources:
+        limits:
+          memory: "1G"

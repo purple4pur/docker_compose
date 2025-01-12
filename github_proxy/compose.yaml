@@ -44,6 +44,10 @@ services:
       traefik.http.routers.github_proxy_objects.service: "github_proxy_objects"
     networks:
       frontend:
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
 
   github_proxy:
     image: "nginx:alpine"
@@ -54,6 +58,10 @@ services:
       frontend:
     volumes:
       - "./config/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
 
 networks:
   frontend:

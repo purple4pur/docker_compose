@@ -16,6 +16,10 @@ services:
       frontend:
     volumes:
       - "./config/sshwifty.conf.json:/etc/sshwifty/config.json:ro"
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
 
 networks:
   frontend:

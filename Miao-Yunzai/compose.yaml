@@ -53,6 +53,10 @@ services:
       - "/home/${BOT_USER:?error}/Miao-Yunzai/redis/logs:/logs"
     networks:
       local:
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
 
 volumes:
   pnpm_store:

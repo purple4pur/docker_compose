@@ -33,6 +33,10 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./config/traefik.yaml:/etc/traefik/traefik.yaml:ro"
       - "./letsencrypt:/letsencrypt"
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
 
   whoami:
     image: "traefik/whoami"
@@ -47,6 +51,10 @@ services:
       traefik.http.routers.whoami.service: "whoami"
     networks:
       frontend:
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
 
 networks:
   frontend:

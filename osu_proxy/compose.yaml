@@ -2,11 +2,6 @@ services:
   c_upper:
     build: "${C_UPPER_BUILD_DIR}"
     container_name: "c_upper"
-    healthcheck:
-      test: ["CMD-SHELL", "(ps | grep app | grep -v grep) || exit 1"]
-      start_period: "2s"
-      interval: "1m"
-      timeout: "2s"
     restart: "unless-stopped"
     environment:
       PORT: "8091"

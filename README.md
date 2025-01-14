@@ -8,42 +8,41 @@ Most composes need an `.env` file to provide variables. See each folder README.
 services:
   SERVICE1:
     build:
-      context: ...
-      dockerfile: ...
+      context: /path/to/folder
+      dockerfile: /path/to/dockerfile
       tags:
-        - ...
+        - "LATEST"
       args:
-        ...: ...
-    image: ...
-    container_name: ...
+        ARG1: "VALUE1"
+    image: IMAGE1:TAG
+    container_name: NAME1
     depends_on:
-      SERVICEx:
-        condition: ...
+      - "SERVICEx"
     healthcheck:
-      test: [...]
-      start_period: ...
-      interval: ...
-      timeout: ...
-    restart: ...
-    hostname: ...
+      test: ["CMD-SHELL", "..."]
+      start_period: "10s"
+      interval: "30s"
+      timeout: "2s"
+    restart: "unless-stopped"
+    hostname: "HOSTNAME"
     environment:
-      ...: ...
-    user: ...
-    command: [...]
+      ENV1: "VALUE1"
+    user: "root"
+    command: ["..."]
     labels:
-      ...: ...
+      LABEL1: "VALUE1"
     networks:
-      ...:
+      NETWORK1:
     ports:
-      - ...
+      - "8080:8080"
     volumes:
-      - ...
+      - "NETWORK1:/path"
     deploy:
       resources:
         limits:
-          memory: ...
+          memory: "1G"
 networks:
-  ...:
+  NETWORK1:
 volumes:
-  ...:
+  VOLUME1:
 ```

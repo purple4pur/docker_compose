@@ -24,6 +24,13 @@ services:
       traefik.http.routers.sftpgo_webdav.entrypoints: "websecure"
       traefik.http.routers.sftpgo_webdav.tls.certresolver: "cloudflare"
       traefik.http.routers.sftpgo_webdav.service: "frp_sftpgo_webdav"
+
+      traefik.http.services.qbt_webui.loadbalancer.server.port: "18080"
+      traefik.http.routers.qbt_webui.rule: "Host(`qbt.${BASEURL:?error}`)"
+      traefik.http.routers.qbt_webui.entrypoints: "websecure"
+      traefik.http.routers.qbt_webui.tls.certresolver: "cloudflare"
+      traefik.http.routers.qbt_webui.service: "qbt_webui"
+      traefik.http.routers.qbt_webui.middlewares: "user_auth"
     networks:
       frontend:
     ports:

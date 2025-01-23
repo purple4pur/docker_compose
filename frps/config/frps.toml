@@ -1,7 +1,8 @@
 bindPort = 7000
 
 allowPorts = [
-  { single = 80 },
-  { single = 2080 },
-  { single = 6022 }
+  { single = 80 }, # webdav
+  { single = 2080 }, # sftpgo webui
+  { single = 6022 }, # ffls
+  { single = 18080 }, # qbt webui
 ]

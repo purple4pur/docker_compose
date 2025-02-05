@@ -14,7 +14,7 @@ services:
       traefik.enable: true
 
       traefik.http.services.github_proxy_github.loadbalancer.server.port: "8080"
-      traefik.http.routers.github_proxy_github.rule: "Host(`github.${BASEURL:?error}`)"
+      traefik.http.routers.github_proxy_github.rule: "Host(`ghproxy.${BASEURL:?error}`)"
       traefik.http.routers.github_proxy_github.entrypoints: "websecure"
       traefik.http.routers.github_proxy_github.tls.certresolver: "cloudflare"
       traefik.http.routers.github_proxy_github.service: "github_proxy_github"

@@ -10,6 +10,7 @@ services:
       - "8082->http://gh_proxy:8082"
       - "8083->http://gh_proxy:8083"
       - "8084->http://gh_proxy:8084"
+      - "8085->http://gh_proxy:8085"
     labels:
       traefik.enable: true
 
@@ -42,6 +43,12 @@ services:
       traefik.http.routers.github_proxy_objects.entrypoints: "websecure"
       traefik.http.routers.github_proxy_objects.tls.certresolver: "cloudflare"
       traefik.http.routers.github_proxy_objects.service: "github_proxy_objects"
+
+      traefik.http.services.github_proxy_api.loadbalancer.server.port: "8085"
+      traefik.http.routers.github_proxy_api.rule: "Host(`api-github.${BASEURL:?error}`)"
+      traefik.http.routers.github_proxy_api.entrypoints: "websecure"
+      traefik.http.routers.github_proxy_api.tls.certresolver: "cloudflare"
+      traefik.http.routers.github_proxy_api.service: "github_proxy_api"
     networks:
       frontend:
     deploy:

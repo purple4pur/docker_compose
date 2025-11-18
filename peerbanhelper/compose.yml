@@ -1,0 +1,26 @@
+services:
+  peerbanhelper:
+    image: "ghostchu/peerbanhelper:v9.0.10"
+    container_name: "peerbanhelper"
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.services.peerbanhelper.loadbalancer.server.port: "9898"
+      traefik.http.routers.peerbanhelper.rule: "Host(`pbh.${BASEURL:?error}`)"
+      traefik.http.routers.peerbanhelper.entrypoints: "websecure"
+      traefik.http.routers.peerbanhelper.tls.certresolver: "cloudflare"
+      traefik.http.routers.peerbanhelper.service: "peerbanhelper"
+    networks:
+      frontend:
+    hostname: "peerbanhelper"
+    volumes:
+      - "./data:/app/data"
+    stop_grace_period: "30s"
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
+
+networks:
+  frontend:
+    external: true

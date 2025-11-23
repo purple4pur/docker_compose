@@ -20,7 +20,7 @@ services:
           memory: "1G"
 
   blog_updater:
-    image: "jamesread/olivetin"
+    image: "jamesread/olivetin:latest-2k"
     container_name: "blog_updater"
     restart: "unless-stopped"
     user: "root"
@@ -35,6 +35,7 @@ services:
       frontend:
     volumes:
       - "./config/olivetin.yaml/:/config/config.yaml:ro"
+      - "./config/.gitconfig/:/root/.gitconfig:ro"
       - "./data:/data"
     deploy:
       resources:

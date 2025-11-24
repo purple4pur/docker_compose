@@ -1,0 +1,22 @@
+services:
+  cyberchef:
+    image: "ghcr.io/gchq/cyberchef:latest"
+    container_name: "cyberchef"
+    restart: "unless-stopped"
+    labels:
+      traefik.enable: true
+      traefik.http.services.cyberchef.loadbalancer.server.port: "80"
+      traefik.http.routers.cyberchef.rule: "Host(`cyberchef.${BASEURL:?error}`)"
+      traefik.http.routers.cyberchef.entrypoints: "websecure"
+      traefik.http.routers.cyberchef.tls.certresolver: "cloudflare"
+      traefik.http.routers.cyberchef.service: "cyberchef"
+    networks:
+      frontend:
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
+
+networks:
+  frontend:
+    external: true

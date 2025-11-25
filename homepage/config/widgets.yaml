@@ -1,0 +1,12 @@
+- datetime:
+    text_size: xl
+    locale: en
+    format:
+      dateStype: long
+      timeStyle: long
+      hour12: true
+- greeting:
+    text_size: xl
+    text: Purple4pur's HP - Service in One Page
+- logo:
+    icon: https://static.quitw.org/img/pfp.small.jpg

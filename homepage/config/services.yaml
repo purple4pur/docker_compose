@@ -1,0 +1,39 @@
+- Cool Online Tools:
+  - IT-Tools:
+      icon: it-tools
+      href: https://tools.quitw.org/
+      description: Handy Tools For Developers
+  - CyberChef:
+      icon: cyberchef
+      href: https://cyberchef.quitw.org/
+      description: The Cyber Swiss Army Knife
+  - Sshwifty:
+      icon: sshwifty
+      href: https://shell.quitw.org/
+      description: Web SSH & Telnet Client
+- Blog and More:
+  - Blog:
+      icon: https://static.quitw.org/img/miku.jpg
+      href: https://blog.quitw.org/
+      description: Dev & Life & Live
+  - Sftpgo:
+      icon: sftpgo
+      href: https://disk.quitw.org/
+      description: Sftpgo Server
+  - Whoami:
+      icon: whoogle
+      href: https://whoami.quitw.org/
+      description: Who am I?
+- Torrent Management:
+  - PeerBanHelper:
+      icon: https://pbh.quitw.org/favicon.ico
+      href: https://pbh.quitw.org/
+      description: Auto Ban Peer
+  - qbittorrent - Shanghai:
+      icon: qbittorrent
+      href: https://qbt.quitw.org/
+      description: Qbittorrent Client
+  - qbittorrent - Homelab:
+      icon: qbittorrent
+      href: https://qbt504.quitw.org/
+      description: Qbittorrent Client

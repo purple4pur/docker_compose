@@ -1,0 +1,29 @@
+services:
+  homepage:
+    image: "ghcr.io/gethomepage/homepage:latest"
+    container_name: "homepage"
+    restart: "unless-stopped"
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: ${BASEURL:?error}
+      PUID: ${PUID:?error}
+      PGID: ${PGID:?error}
+    labels:
+      traefik.enable: true
+      traefik.http.services.homepage.loadbalancer.server.port: "3000"
+      traefik.http.routers.homepage.rule: "Host(`${BASEURL:?error}`)"
+      traefik.http.routers.homepage.entrypoints: "websecure"
+      traefik.http.routers.homepage.tls.certresolver: "cloudflare"
+      traefik.http.routers.homepage.service: "homepage"
+    networks:
+      frontend:
+    volumes:
+      - "./config:/app/config"
+      - "./logs:/app/logs"
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
+
+networks:
+  frontend:
+    external: true

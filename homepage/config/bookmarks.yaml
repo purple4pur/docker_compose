@@ -18,6 +18,9 @@
     - icon: osu
       href: https://osu.ppy.sh/users/19433402
 - Quick Links:
+  - umami:
+    - icon: umami
+      href: https://cloud.umami.is/
   - Proxy Usage:
     - icon: clash
       href: https://static.quitw.org/dashboard/

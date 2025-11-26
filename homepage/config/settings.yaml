@@ -1,11 +1,13 @@
-title: Purple4pur's HomePage
+title: Purple4pur - HomePage
 background: https://static.quitw.org/img/137292910_p0.small.jpg
 cardBlur: xl
 favicon: https://static.quitw.org/img/pfp.small.jpg
 theme: light
-color: white
+color: stone
+bookmarksStyle: icons
 disableCollapse: true
 useEqualHeights: true
 headerStyle: boxed
 target: _blank
+hideVersion: true
 logpath: /app/logs

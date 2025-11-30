@@ -22,5 +22,6 @@ printf "\n\n> rm .git/index.lock -f && git checkout . && git pull --rebase\n\n"
 printf "\n\n> yes | pnpm i\n\n"
 (yes | pnpm i) || exit 1
 
-printf "\n\n> npm run app\n\n"
-(npm run app) || exit 1
+#printf "\n\n> npm run app\n\n"
+#(npm run app) || exit 1
+tail -f /dev/null

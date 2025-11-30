@@ -86,7 +86,7 @@ RUN REPO_URL=${REPO_URL:-"https://github.com/yoimiya-kokomi/Miao-Yunzai.git"} \
     && git remote set-url origin https://github.com/yoimiya-kokomi/Miao-Yunzai.git
 
 COPY --from=resource /res/entrypoint.sh /app/Miao-Yunzai/entrypoint.sh
-ADD --chmod=700 ./run_app.sh /app/Miao-Yunzai/run_app.sh
+#ADD --chmod=700 ./run_app.sh /app/Miao-Yunzai/run_app.sh
 
 WORKDIR /app/Miao-Yunzai
 

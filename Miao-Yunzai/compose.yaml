@@ -31,6 +31,7 @@ services:
       - "/home/${BOT_USER:?error}/Miao-Yunzai/data:/app/Miao-Yunzai/data"       # 数据文件
       - "/home/${BOT_USER:?error}/Miao-Yunzai/temp:/app/Miao-Yunzai/temp"       # 临时文件
       - "/home/${BOT_USER:?error}/Miao-Yunzai/plugins:/app/Miao-Yunzai/plugins"
+      - "./docker/run_app.sh:/app/Miao-Yunzai/run_app.sh:ro"
 
       - "pnpm_store:/root/.local/share/pnpm/store"
       - "node_modules:/app/Miao-Yunzai/node_modules"

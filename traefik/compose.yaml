@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: "traefik:v3.2"
+    image: "traefik:v3.6"
     container_name: "traefik"
     restart: "unless-stopped"
     environment:
@@ -10,21 +10,6 @@ services:
 
       traefik.http.middlewares.admin_auth.basicAuth.users: "${ADMIN_HTPASSWD}"
       traefik.http.middlewares.user_auth.basicAuth.users: "${USER_HTPASSWD}"
-
-      traefik.http.middlewares.dashboard_redirect.redirectregex.regex: "^(?:https?:\\/\\/)?dashboard\\.${BASEURL_RE:?error}"
-      traefik.http.middlewares.dashboard_redirect.redirectregex.replacement: "https://${BASEURL:?error}/dashboard" # should not add trailing slash
-
-      traefik.http.routers.dashboard_redirect.rule: "Host(`dashboard.${BASEURL:?error}`)"
-      traefik.http.routers.dashboard_redirect.entrypoints: "websecure"
-      traefik.http.routers.dashboard_redirect.tls.certresolver: "cloudflare"
-      traefik.http.routers.dashboard_redirect.service: "noop@internal"
-      traefik.http.routers.dashboard_redirect.middlewares: "dashboard_redirect"
-
-      traefik.http.routers.dashboard.rule: "Host(`${BASEURL:?error}`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))"
-      traefik.http.routers.dashboard.entrypoints: "websecure"
-      traefik.http.routers.dashboard.tls.certresolver: "cloudflare"
-      traefik.http.routers.dashboard.service: "api@internal"
-      traefik.http.routers.dashboard.middlewares: "admin_auth"
     networks:
       frontend:
     ports:

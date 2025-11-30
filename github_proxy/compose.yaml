@@ -14,11 +14,17 @@ services:
     labels:
       traefik.enable: true
 
-      traefik.http.services.github_proxy_github.loadbalancer.server.port: "8080"
+      traefik.http.middlewares.ghproxy_to_raw.redirectregex.regex: "^(?:https?:\\/\\/)?ghproxy.${BASEURL:?error}\\/(?<user>[\\w-]+)\\/(?<repo>[\\w-]+)\\/raw(?<tail>.*)"
+      traefik.http.middlewares.ghproxy_to_raw.redirectregex.replacement: "https://raw-githubusercontent.${BASEURL:?error}/$${user}/$${repo}$${tail}"
+
+      #traefik.http.services.github_proxy_github.loadbalancer.server.port: "8080"
+      #traefik.http.routers.github_proxy_github.rule: "Host(`ghproxy.${BASEURL:?error}`)"
+      #traefik.http.routers.github_proxy_github.entrypoints: "websecure"
+      #traefik.http.routers.github_proxy_github.tls.certresolver: "cloudflare"
+      #traefik.http.routers.github_proxy_github.service: "github_proxy_github"
       traefik.http.routers.github_proxy_github.rule: "Host(`ghproxy.${BASEURL:?error}`)"
-      traefik.http.routers.github_proxy_github.entrypoints: "websecure"
-      traefik.http.routers.github_proxy_github.tls.certresolver: "cloudflare"
-      traefik.http.routers.github_proxy_github.service: "github_proxy_github"
+      traefik.http.routers.github_proxy_github.service: "noop@internal"
+      traefik.http.routers.github_proxy_github.middlewares: "ghproxy_to_raw"
 
       traefik.http.services.github_proxy_assets.loadbalancer.server.port: "8081"
       traefik.http.routers.github_proxy_assets.rule: "Host(`github-githubassets.${BASEURL:?error}`)"

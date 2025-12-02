@@ -1,11 +1,11 @@
 services:
   it-tools:
-    image: "corentinth/it-tools:latest"
+    image: "sharevb/it-tools:latest"
     container_name: "it-tools"
     restart: "unless-stopped"
     labels:
       traefik.enable: true
-      traefik.http.services.it-tools.loadbalancer.server.port: "80"
+      traefik.http.services.it-tools.loadbalancer.server.port: "8080"
       traefik.http.routers.it-tools.rule: "Host(`tools.${BASEURL:?error}`)"
       traefik.http.routers.it-tools.entrypoints: "websecure"
       traefik.http.routers.it-tools.tls.certresolver: "cloudflare"

@@ -14,6 +14,15 @@ services:
       traefik.http.routers.homepage.entrypoints: "websecure"
       traefik.http.routers.homepage.tls.certresolver: "cloudflare"
       traefik.http.routers.homepage.service: "homepage"
+
+      traefik.http.middlewares.www_to_root.redirectregex.regex: "^(?:https?:\\/\\/)?www\\.${BASEURL_REGEX:?error}(.*)"
+      traefik.http.middlewares.www_to_root.redirectregex.replacement: "https://${BASEURL:?error}$${1}"
+      traefik.http.middlewares.www_to_root.redirectregex.permanent: true
+      traefik.http.routers.www_to_root.rule: "Host(`www.${BASEURL:?error}`)"
+      traefik.http.routers.www_to_root.entrypoints: "websecure"
+      traefik.http.routers.www_to_root.tls.certresolver: "cloudflare"
+      traefik.http.routers.www_to_root.service: "noop@internal"
+      traefik.http.routers.www_to_root.middlewares: "www_to_root"
     networks:
       frontend:
     volumes:

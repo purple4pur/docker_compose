@@ -8,6 +8,6 @@ bookmarksStyle: icons
 disableCollapse: true
 useEqualHeights: true
 headerStyle: boxed
-target: _blank
-hideVersion: true
+target: _self
+hideVersion: false
 logpath: /app/logs

@@ -1,4 +1,5 @@
 bindPort = 7000
+kcpBindPort = 7000
 
 allowPorts = [
   { single = 80 }, # webdav

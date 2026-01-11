@@ -1,0 +1,27 @@
+services:
+  qui:
+    image: ghcr.io/autobrr/qui:latest
+    container_name: qui
+    restart: unless-stopped
+    volumes:
+      - ./config:/config
+      - ./logs:/logs
+    environment:
+      QUI__LOG_PATH: /logs/qui.log
+    labels:
+      traefik.enable: true
+      traefik.http.services.qui.loadbalancer.server.port: "7476"
+      traefik.http.routers.qui.rule: "Host(`qui.${BASEURL:?error}`)"
+      traefik.http.routers.qui.entrypoints: "websecure"
+      traefik.http.routers.qui.tls.certresolver: "cloudflare"
+      traefik.http.routers.qui.service: "qui"
+    networks:
+      frontend:
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
+
+networks:
+  frontend:
+    external: true

@@ -25,6 +25,10 @@
       href: https://shell.quitw.org/
       description: Web SSH & Telnet Client
 - Torrent Management:
+  - qui:
+      icon: qui
+      href: https://qui.quitw.org/
+      description: All-in-One qBittorrent Web UI
   - PeerBanHelper:
       icon: https://pbh.quitw.org/favicon.ico
       href: https://pbh.quitw.org/

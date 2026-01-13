@@ -3,10 +3,14 @@
       icon: https://static.quitw.org/img/miku.jpg
       href: https://blog.quitw.org/
       description: Dev & Life & Live
-  - Sftpgo:
+  - Sftpgo (Shanghai):
       icon: sftpgo
       href: https://disk.quitw.org/
       description: Sftpgo Server
+  - Filebrowser (Homelab):
+      icon: filebrowser-quantum
+      href: https://files504.quitw.org/
+      description: Web File Browser
   - Whoami:
       icon: whoogle
       href: https://whoami.quitw.org/

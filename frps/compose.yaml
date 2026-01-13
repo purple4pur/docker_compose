@@ -38,6 +38,12 @@ services:
       traefik.http.routers.qbt_webui_504.tls.certresolver: "cloudflare"
       traefik.http.routers.qbt_webui_504.service: "qbt_webui_504"
       traefik.http.routers.qbt_webui_504.middlewares: "user_auth"
+
+      traefik.http.services.filebrowser_504.loadbalancer.server.port: "18090"
+      traefik.http.routers.filebrowser_504.rule: "Host(`files504.${BASEURL:?error}`)"
+      traefik.http.routers.filebrowser_504.entrypoints: "websecure"
+      traefik.http.routers.filebrowser_504.tls.certresolver: "cloudflare"
+      traefik.http.routers.filebrowser_504.service: "filebrowser_504"
     networks:
       frontend:
     ports:

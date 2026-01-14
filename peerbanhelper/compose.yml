@@ -1,7 +1,8 @@
 services:
   peerbanhelper:
-    image: "ghostchu/peerbanhelper:v9.2.2"
+    image: "ghostchu/peerbanhelper:v9.2.4"
     container_name: "peerbanhelper"
+    user: ${UID}:${GID}
     restart: unless-stopped
     labels:
       traefik.enable: true

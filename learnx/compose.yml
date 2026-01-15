@@ -1,0 +1,22 @@
+services:
+  learnx:
+    image: ghcr.io/purple4pur/learnx:slim
+    container_name: "learnx"
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.services.learnx.loadbalancer.server.port: "80"
+      traefik.http.routers.learnx.rule: "Host(`learnx.${BASEURL:?error}`)"
+      traefik.http.routers.learnx.entrypoints: "websecure"
+      traefik.http.routers.learnx.tls.certresolver: "cloudflare"
+      traefik.http.routers.learnx.service: "learnx"
+    networks:
+      frontend:
+    deploy:
+      resources:
+        limits:
+          memory: "1G"
+
+networks:
+  frontend:
+    external: true

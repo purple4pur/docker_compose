@@ -15,7 +15,7 @@
       icon: whoogle
       href: https://whoami.quitw.org/
       description: Who am I?
-- Cool Online Tools:
+- Cool Online Tools (Self-Hosted):
   - IT-Tools:
       icon: it-tools
       href: https://tools.quitw.org/
@@ -28,6 +28,10 @@
       icon: sshwifty
       href: https://shell.quitw.org/
       description: Web SSH & Telnet Client
+  - Learn X in Y Minutes:
+      icon: code-cademy
+      href: https://learnx.quitw.org/
+      description: Code Documentation Written As Code
 - Torrent Management:
   - qui:
       icon: qui

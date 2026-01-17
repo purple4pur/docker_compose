@@ -1,0 +1,37 @@
+services:
+  cadvisor:
+    image: ghcr.io/google/cadvisor:0.56.2
+    container_name: cadvisor
+    privileged: true
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+    restart: unless-stopped
+    command:
+      - --docker_only=true
+      - --housekeeping_interval=2s
+      - --store_container_labels=false
+      - --disable_metrics=percpu,sched,tcp,udp,disk,diskIO,hugetlb,referenced_memory,cpu_topology,resctrl
+    labels:
+      traefik.enable: true
+      traefik.http.services.cadvisor.loadbalancer.server.port: "8080"
+      traefik.http.routers.cadvisor.rule: "Host(`cadvisor.${BASEURL:?error}`)"
+      traefik.http.routers.cadvisor.entrypoints: "websecure"
+      traefik.http.routers.cadvisor.tls.certresolver: "cloudflare"
+      traefik.http.routers.cadvisor.service: "cadvisor"
+      traefik.http.routers.cadvisor.middlewares: "admin_auth"
+    networks:
+      frontend:
+    deploy:
+      resources:
+        limits:
+          memory: ${MEMORY_LIMIT:?error}
+
+networks:
+  frontend:
+    external: true

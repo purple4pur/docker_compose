@@ -11,6 +11,10 @@
       icon: filebrowser-quantum
       href: https://files504.quitw.org/
       description: Web File Browser
+  - cAdvisor:
+      icon: cadvisor
+      href: https://cadvisor.quitw.org/
+      description: Resource Monitor
   - Whoami:
       icon: whoogle
       href: https://whoami.quitw.org/

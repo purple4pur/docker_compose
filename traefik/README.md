@@ -1,13 +1,7 @@
-### Example `./config/traefik.yaml`
+# [Traefik](https://github.com/traefik/traefik)
 
-See [Traefik Config Snippets](https://blog.quitw.org//post/Traefik%20Config%20Snippets.html) .
+### Usage
 
-### Example `.env`
-
-```sh
-CF_DNS_API_TOKEN = '...'
-ADMIN_HTPASSWD = '...'
-USER_HTPASSWD = '...'
-BASEURL = 'hostname.com'
-BASEURL_RE = 'hostname\.com'
-```
+1. create `./config/traefik.yaml` referring to [Traefik Config Snippets](https://blog.quitw.org//post/Traefik%20Config%20Snippets.html)
+2. copy `.env.example` to `.env` and set variables
+3. `docker compose up -d`

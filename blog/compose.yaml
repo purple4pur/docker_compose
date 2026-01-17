@@ -17,7 +17,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: "1G"
+          memory: ${MEMORY_LIMIT:?error}
 
   blog_updater:
     image: "jamesread/olivetin:latest-2k"
@@ -40,7 +40,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: "1G"
+          memory: ${MEMORY_LIMIT:?error}
 
 networks:
   frontend:

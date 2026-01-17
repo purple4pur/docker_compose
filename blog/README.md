@@ -31,4 +31,5 @@ actions:
 
 ```sh
 BASEURL = 'hostname.com'
+MEMORY_LIMIT = '20M'
 ```

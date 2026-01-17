@@ -1,5 +1,6 @@
-### Example `.env`
+# [Sshwifty](https://github.com/nirui/sshwifty)
 
-```sh
-BASEURL = 'hostname.com'
-```
+### Usage
+
+1. copy `.env.example` to `.env` and set variables
+2. `docker compose up -d`

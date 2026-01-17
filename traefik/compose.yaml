@@ -21,7 +21,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: "1G"
+          memory: ${MEMORY_LIMIT:?error}
 
   whoami:
     image: "traefik/whoami"
@@ -39,7 +39,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: "1G"
+          memory: '10M'
 
 networks:
   frontend:

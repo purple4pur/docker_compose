@@ -1,6 +1,6 @@
 services:
   peerbanhelper:
-    image: "ghostchu/peerbanhelper:v9.2.4"
+    image: "ghostchu/peerbanhelper:v9.2.5"
     container_name: "peerbanhelper"
     user: ${UID}:${GID}
     restart: unless-stopped
@@ -20,7 +20,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: "1G"
+          memory: ${MEMORY_LIMIT:?error}
 
 networks:
   frontend:

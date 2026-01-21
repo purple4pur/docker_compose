@@ -8,4 +8,5 @@ allowPorts = [
   { single = 18080 }, # pc.qbt_webui
   { single = 18081 }, # homelab.qbt_webui
   { single = 18090 }, # homelab.filebrowser
+  { single = 18091 }, # pc.filebrowser
 ]

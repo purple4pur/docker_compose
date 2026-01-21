@@ -12,18 +12,18 @@ services:
     labels:
       traefik.enable: true
 
-      traefik.http.services.frp_sftpgo_webui.loadbalancer.server.port: "2080"
-      traefik.http.routers.sftpgo_webui.rule: "Host(`disk.${BASEURL:?error}`)"
-      traefik.http.routers.sftpgo_webui.entrypoints: "websecure"
-      traefik.http.routers.sftpgo_webui.tls.certresolver: "cloudflare"
-      traefik.http.routers.sftpgo_webui.service: "frp_sftpgo_webui"
-      traefik.http.routers.sftpgo_webui.middlewares: "user_auth"
+      #traefik.http.services.frp_sftpgo_webui.loadbalancer.server.port: "2080"
+      #traefik.http.routers.sftpgo_webui.rule: "Host(`disk.${BASEURL:?error}`)"
+      #traefik.http.routers.sftpgo_webui.entrypoints: "websecure"
+      #traefik.http.routers.sftpgo_webui.tls.certresolver: "cloudflare"
+      #traefik.http.routers.sftpgo_webui.service: "frp_sftpgo_webui"
+      #traefik.http.routers.sftpgo_webui.middlewares: "user_auth"
 
-      traefik.http.services.frp_sftpgo_webdav.loadbalancer.server.port: "80"
-      traefik.http.routers.sftpgo_webdav.rule: "Host(`webdav${SUFFIX1}.${BASEURL:?error}`) || Host(`webdav${SUFFIX2}.${BASEURL:?error}`)"
-      traefik.http.routers.sftpgo_webdav.entrypoints: "websecure"
-      traefik.http.routers.sftpgo_webdav.tls.certresolver: "cloudflare"
-      traefik.http.routers.sftpgo_webdav.service: "frp_sftpgo_webdav"
+      #traefik.http.services.frp_sftpgo_webdav.loadbalancer.server.port: "80"
+      #traefik.http.routers.sftpgo_webdav.rule: "Host(`webdav${SUFFIX1}.${BASEURL:?error}`) || Host(`webdav${SUFFIX2}.${BASEURL:?error}`)"
+      #traefik.http.routers.sftpgo_webdav.entrypoints: "websecure"
+      #traefik.http.routers.sftpgo_webdav.tls.certresolver: "cloudflare"
+      #traefik.http.routers.sftpgo_webdav.service: "frp_sftpgo_webdav"
 
       traefik.http.services.qbt_webui.loadbalancer.server.port: "18080"
       traefik.http.routers.qbt_webui.rule: "Host(`qbt.${BASEURL:?error}`)"

@@ -3,10 +3,10 @@
       icon: https://static.quitw.org/img/miku.jpg
       href: https://blog.quitw.org/
       description: Dev & Life & Live
-  - Sftpgo (Shanghai):
-      icon: sftpgo
-      href: https://disk.quitw.org/
-      description: Sftpgo Server
+  - Filebrowser (Shanghai):
+      icon: filebrowser-quantum
+      href: https://files.quitw.org/
+      description: Web File Browser
   - Filebrowser (Homelab):
       icon: filebrowser-quantum
       href: https://files504.quitw.org/
@@ -28,11 +28,11 @@
       icon: https://pbh.quitw.org/favicon.ico
       href: https://pbh.quitw.org/
       description: Auto Ban Peer
-  - qBittorrent WebUI - Shanghai:
+  - qBittorrent WebUI (Shanghai):
       icon: qbittorrent
       href: https://qbt.quitw.org/
       description: Torrent Client
-  - qBittorrent WebUI - Homelab:
+  - qBittorrent WebUI (Homelab):
       icon: qbittorrent
       href: https://qbt504.quitw.org/
       description: Torrent Client

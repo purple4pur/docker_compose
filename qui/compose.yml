@@ -15,6 +15,7 @@ services:
       traefik.http.routers.qui.entrypoints: "websecure"
       traefik.http.routers.qui.tls.certresolver: "cloudflare"
       traefik.http.routers.qui.service: "qui"
+      traefik.http.routers.qui.middlewares: "compressor"
     networks:
       frontend:
     deploy:

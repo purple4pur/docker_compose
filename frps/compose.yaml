@@ -30,26 +30,28 @@ services:
       traefik.http.routers.qbt_webui.entrypoints: "websecure"
       traefik.http.routers.qbt_webui.tls.certresolver: "cloudflare"
       traefik.http.routers.qbt_webui.service: "qbt_webui"
-      traefik.http.routers.qbt_webui.middlewares: "user_auth"
+      traefik.http.routers.qbt_webui.middlewares: "user_auth,compressor"
 
       traefik.http.services.qbt_webui_504.loadbalancer.server.port: "18081"
       traefik.http.routers.qbt_webui_504.rule: "Host(`qbt504.${BASEURL:?error}`)"
       traefik.http.routers.qbt_webui_504.entrypoints: "websecure"
       traefik.http.routers.qbt_webui_504.tls.certresolver: "cloudflare"
       traefik.http.routers.qbt_webui_504.service: "qbt_webui_504"
-      traefik.http.routers.qbt_webui_504.middlewares: "user_auth"
+      traefik.http.routers.qbt_webui_504.middlewares: "user_auth,compressor"
 
       traefik.http.services.filebrowser.loadbalancer.server.port: "18091"
       traefik.http.routers.filebrowser.rule: "Host(`files.${BASEURL:?error}`)"
       traefik.http.routers.filebrowser.entrypoints: "websecure"
       traefik.http.routers.filebrowser.tls.certresolver: "cloudflare"
       traefik.http.routers.filebrowser.service: "filebrowser"
+      traefik.http.routers.filebrowser.middlewares: "compressor"
 
       traefik.http.services.filebrowser_504.loadbalancer.server.port: "18090"
       traefik.http.routers.filebrowser_504.rule: "Host(`files504.${BASEURL:?error}`)"
       traefik.http.routers.filebrowser_504.entrypoints: "websecure"
       traefik.http.routers.filebrowser_504.tls.certresolver: "cloudflare"
       traefik.http.routers.filebrowser_504.service: "filebrowser_504"
+      traefik.http.routers.filebrowser_504.middlewares: "compressor"
     networks:
       frontend:
     ports:

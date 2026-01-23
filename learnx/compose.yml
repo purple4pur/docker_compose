@@ -10,6 +10,7 @@ services:
       traefik.http.routers.learnx.entrypoints: "websecure"
       traefik.http.routers.learnx.tls.certresolver: "cloudflare"
       traefik.http.routers.learnx.service: "learnx"
+      traefik.http.routers.learnx.middlewares: "compressor"
     networks:
       frontend:
     deploy:

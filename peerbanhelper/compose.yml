@@ -11,6 +11,7 @@ services:
       traefik.http.routers.peerbanhelper.entrypoints: "websecure"
       traefik.http.routers.peerbanhelper.tls.certresolver: "cloudflare"
       traefik.http.routers.peerbanhelper.service: "peerbanhelper"
+      traefik.http.routers.peerbanhelper.middlewares: "compressor"
     networks:
       frontend:
     hostname: "peerbanhelper"

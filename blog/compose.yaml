@@ -10,6 +10,7 @@ services:
       traefik.http.routers.blog.entrypoints: "websecure"
       traefik.http.routers.blog.tls.certresolver: "cloudflare"
       traefik.http.routers.blog.service: "blog_web"
+      traefik.http.routers.blog.middlewares: "compressor"
     networks:
       frontend:
     volumes:
@@ -31,6 +32,7 @@ services:
       traefik.http.routers.blog_updater.tls.certresolver: "cloudflare"
       traefik.http.routers.blog_updater.entrypoints: "websecure"
       traefik.http.routers.blog_updater.service: "blog_updater"
+      traefik.http.routers.blog_updater.middlewares: "compressor"
     networks:
       frontend:
     volumes:

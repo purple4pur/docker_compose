@@ -8,10 +8,11 @@ services:
     labels:
       traefik.enable: true
       traefik.http.services.sshwifty.loadbalancer.server.port: "8182"
-      traefik.http.routers.sshwifty_cf.rule: "Host(`shell.${BASEURL:?error}`)"
-      traefik.http.routers.sshwifty_cf.entrypoints: "websecure"
-      traefik.http.routers.sshwifty_cf.tls.certresolver: "cloudflare"
-      traefik.http.routers.sshwifty_cf.service: "sshwifty"
+      traefik.http.routers.sshwifty.rule: "Host(`shell.${BASEURL:?error}`)"
+      traefik.http.routers.sshwifty.entrypoints: "websecure"
+      traefik.http.routers.sshwifty.tls.certresolver: "cloudflare"
+      traefik.http.routers.sshwifty.service: "sshwifty"
+      traefik.http.routers.sshwifty.middlewares: "compressor"
     networks:
       frontend:
     volumes:

@@ -10,6 +10,7 @@ services:
       traefik.http.routers.it-tools.entrypoints: "websecure"
       traefik.http.routers.it-tools.tls.certresolver: "cloudflare"
       traefik.http.routers.it-tools.service: "it-tools"
+      traefik.http.routers.it-tools.middlewares: "compressor"
     networks:
       frontend:
     deploy:

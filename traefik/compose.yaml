@@ -10,6 +10,9 @@ services:
 
       traefik.http.middlewares.admin_auth.basicAuth.users: "${ADMIN_HTPASSWD}"
       traefik.http.middlewares.user_auth.basicAuth.users: "${USER_HTPASSWD}"
+
+      traefik.http.middlewares.compressor.compress: true
+      traefik.http.middlewares.compressor.compress.excludedContentTypes: "text/event-stream"
     networks:
       frontend:
     ports:
@@ -34,6 +37,7 @@ services:
       traefik.http.routers.whoami.entrypoints: "websecure"
       traefik.http.routers.whoami.tls.certresolver: "cloudflare"
       traefik.http.routers.whoami.service: "whoami"
+      traefik.http.routers.whoami.middlewares: "compressor"
     networks:
       frontend:
     deploy:

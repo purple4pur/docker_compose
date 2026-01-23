@@ -14,10 +14,10 @@ services:
     restart: unless-stopped
     command:
       - --docker_only=true
-      - --housekeeping_interval=10s
-      - --storage_duration=10m0s
+      - --housekeeping_interval=8s
+      - --storage_duration=15m0s
       - --store_container_labels=false
-      - --disable_metrics=percpu,sched,tcp,udp,disk,diskIO,hugetlb,referenced_memory,cpu_topology,resctrl
+      - --disable_metrics=percpu,disk,advtcp,cpu_topology,cpuset,hugetlb,memory_numa,process,referenced_memory,resctrl,sched,tcp,udp
     labels:
       traefik.enable: true
       traefik.http.services.cadvisor.loadbalancer.server.port: "8080"
@@ -25,7 +25,7 @@ services:
       traefik.http.routers.cadvisor.entrypoints: "websecure"
       traefik.http.routers.cadvisor.tls.certresolver: "cloudflare"
       traefik.http.routers.cadvisor.service: "cadvisor"
-      traefik.http.routers.cadvisor.middlewares: "admin_auth"
+      traefik.http.routers.cadvisor.middlewares: "admin_auth,compressor"
     networks:
       frontend:
     deploy:

@@ -32,7 +32,6 @@ services:
       traefik.http.routers.blog_updater.tls.certresolver: "cloudflare"
       traefik.http.routers.blog_updater.entrypoints: "websecure"
       traefik.http.routers.blog_updater.service: "blog_updater"
-      traefik.http.routers.blog_updater.middlewares: "compressor"
     networks:
       frontend:
     volumes:

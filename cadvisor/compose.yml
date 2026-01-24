@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
     command:
       - --docker_only=true
-      - --housekeeping_interval=8s
+      - --housekeeping_interval=5s
       - --storage_duration=15m0s
       - --store_container_labels=false
       - --disable_metrics=percpu,disk,advtcp,cpu_topology,cpuset,hugetlb,memory_numa,process,referenced_memory,resctrl,sched,tcp,udp

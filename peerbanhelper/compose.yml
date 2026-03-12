@@ -1,6 +1,6 @@
 services:
   peerbanhelper:
-    image: "ghostchu/peerbanhelper:v9.2.5"
+    image: "ghostchu/peerbanhelper:latest"
     container_name: "peerbanhelper"
     user: ${UID}:${GID}
     restart: unless-stopped

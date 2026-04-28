@@ -49,6 +49,7 @@
       icon: sshwifty
       href: https://shell.quitw.org/
       description: Web SSH & Telnet Client
+      target: _blank
   - Learn X in Y Minutes:
       icon: code-cademy
       href: https://learnx.quitw.org/
